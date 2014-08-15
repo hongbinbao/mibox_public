@@ -24,7 +24,7 @@ class Cases(unittest.TestCase):
         #super(VideoPlay, self).tearDown()
         #d.watcher("AUTO_FC_WHEN_ANR").when(text="ANR").when(text="Wait") .press.back.home()
         d.watcher("AUTO_FC_WHEN_ANR").when(text="ANR").when(text="Wait") .click(text="确定")
-        for i in xrange(6):
+        for i in xrange(8):
             d.press('back')
         d.press('home')# 'home, back,menu'd.press.home()
         d.press('home') 
@@ -35,7 +35,7 @@ class Cases(unittest.TestCase):
        """
         assert d(text="应用商店").exists, 'App Store icon not found!'
         d(text="应用商店").sibling(className='android.view.View').click.wait()
-        assert d(resourceId="com.xiaomi.mitv.appstore:id/title_group").child(text='应用商 店').wait.exists(timeout=5000), 'launch App Store failed!'
+        assert d(resourceId='com.xiaomi.mitv.appstore:id/title_chinese_textview', text='应用商店').wait.exists(timeout=5000), 'launch App Store failed!'
         d.press('back')
         assert d(text="应用商店").wait.exists(timeout=10000), 'exit from App Store failed!'
         #d(resourceId="com.xiaomi.mitv.appstore:id/title_chinese_textview",text='应 用商店').wait.exists()
@@ -71,9 +71,9 @@ class Cases(unittest.TestCase):
         d(text="在线影视").sibling(className='android.view.View').click.wait()
         #menu_hot_highlight_focus_png =  os.path.join(PIC_DIR, 'menu_hot_highlight_focus.png')
         #menu_hot_highlight_nofocus_png  =  os.path.join(PIC_DIR, 'menu_hot_highlight_nofocus.png')
-        if  d.find('menu_hot_highlight_focus.png', timeout=15) :
+        if  d.find('menu_hot_highlight_focus.png', timeout=20) :
             pass
-        elif  d.find('menu_hot_highlight_nofocus.png', timeout=15):
+        elif  d.find('menu_hot_highlight_nofocus.png', timeout=20):
             pass
         else:
             assert False, 'open online video failed!' 
@@ -86,7 +86,7 @@ class Cases(unittest.TestCase):
        """
         assert d(text="游戏中心").exists, 'Game Center icon not found!'
         d(text="游戏中心").sibling(className='android.view.View').click.wait() 
-        assert d(text="热门精选").wait.exists(timeout=10000), 'launch Game Center failed!'
+        assert d(className='android.widget.FrameLayout').child(text="推荐").wait.exists(timeout=10000), 'Launch Game Center failed!'
         d.press('home') 
         assert d(text="游戏中心").wait.exists(timeout=10000), 'exit from Game Center failed!'
 
@@ -94,7 +94,7 @@ class Cases(unittest.TestCase):
         """
         launch  app store and exit
        """
-        for i in xrange(8):
+        for i in xrange(4):
             d.press('right')
         assert d(text="小米盒子设置").exists, 'MiBox Setting icon not found!'
         d(text="小米盒子设置").click.wait()
@@ -105,7 +105,7 @@ class Cases(unittest.TestCase):
         assert d(text="小米盒子设置").wait.exists(timeout=10000), 'exit from MiBox Setting failed!'
 
     def testLaunchAndExitMiracast(self):
-        for i in xrange(8):
+        for i in xrange(4):
             d.press('right')
         assert d(text="无线显示").exists, 'Miracast icon not found!'
         d(text="无线显示").click.wait()
@@ -113,59 +113,16 @@ class Cases(unittest.TestCase):
         assert d(text="无线显示").wait.exists(timeout=10000), 'exit from Miracast failed!'
 
     def testLaunchAndExitMediaExplorer(self):
-        for i in xrange(8):
+        for i in xrange(4):
             d.press('right')
         assert d(text="高清播放器").exists, 'Media Explorer icon not found!'
         d(text="高清播放器").click.wait()
-        assert d(text="视频").wait.exists(timeout=5000), 'launch Media Explorer failed!'
-        assert d(text="图片").wait.exists(timeout=5000), 'launch Media Explorer failed!'
-        assert d(text="音乐").wait.exists(timeout=5000), 'launch Media Explorer failed!'
+        assert d(resourceId='com.xiaomi.mitv.mediaexplorer:id/dev', text='设备').wait.exists(timeout=5000), 'launch Media Explorer failed!'
+        assert d(resourceId='com.xiaomi.mitv.mediaexplorer:id/video', text="视频").wait.exists(timeout=5000), 'launch Media Explorer failed!'
+        d.press('back')
+        d.sleep(3)
         d.press('back')
         assert d(text="高清播放器").wait.exists(timeout=10000), 'exit from Media Explorer failed!'
-
-    def testInstallAndUninstallGame(self):
-        """
-        launch  app store and exit
-       """
-        assert d(text="游戏中心").exists, 'Game Center icon not found!'
-        d(text="游戏中心").sibling(className='android.view.View').click.wait()
-        d(className='android.widget.FrameLayout').child(text="热门精选").wait.exists(timeout=5000)
-        d.sleep(3)
-        d.press('enter')
-        d.sleep(3)
-        d.press('enter')
-        d.sleep(3)
-        d.press('enter')
-        if d(resourceId='com.xiaomi.mibox.gamecenter:id/update', text='打开').wait.exists(timeout=3000):
-            pass
-        else:
-            assert d(resourceId='com.xiaomi.mibox.gamecenter:id/title', text='游戏详情').wait.exists(timeout=10000), 'game detail screen not appear'
-            assert d(resourceId='com.xiaomi.mibox.gamecenter:id/app_install_button', text='安装').exists, 'install button not found!'
-            d(resourceId='com.xiaomi.mibox.gamecenter:id/app_install_button', text='安装').click.wait()
-            assert d(resourceId='com.xiaomi.mibox.gamecenter:id/app_install_button',text='打开').wait.exists(timeout=300000), 'game app install failed!'
-            d.press('back')
-            d(resourceId='com.xiaomi.mibox.gamecenter:id/title', text='游戏详情').wait.exists(timeout=5000)
-            d.press('enter')
-            d.sleep(2)
-            d.press('enter')
-            d.sleep(2)
-            d.press('enter')
-            assert d(resourceId='com.xiaomi.mibox.gamecenter:id/uninstall', text='卸载').wait.exists(timeout=5000) , 'unable to enter uninstall screen' 
-        d.press('right')
-        d.sleep(2)
-        d.press('right')
-        d.sleep(2)
-        d.press('enter')
-        d.sleep(3)
-        #d(resourceId='com.xiaomi.mibox.gamecenter:id/uninstall', text='卸载').click.wait()
-        d.press('left')
-        d.sleep(2)
-        d.press('enter')
-        d(text='返回').wait.exists(timeout=30000)
-        d.press('enter')
-        d(className='android.widget.FrameLayout').child(text="热门精选").wait.exists(timeout=5000)
-        d.press('back') 
-        #assert d(text="游戏中心").wait.exists(timeout=10000), 'exit from game center failed!'
 
     def testPlayVideoBetweenApp_short(self):
         """
@@ -247,21 +204,22 @@ class Cases(unittest.TestCase):
         #menu_hot_highlight_nofocus_png  =  os.path.join(PIC_DIR, 'menu_hot_highlight_nofocus.png')
         #preview_shoucang_png =  os.path.join(PIC_DIR, 'video_preview_sub_shoucang.png')
         #preview_pinglun_png =  os.path.join(PIC_DIR, 'video_preview_sub_pinglun.png')
-        if  d.find('menu_hot_highlight_focus.png', timeout=15) :
+        if  d.find('menu_hot_highlight_focus.png', timeout=30) :
             d.press('down')
             d.sleep(2)
             d.press('enter') 
-        elif  d.find('menu_hot_highlight_nofocus.png', timeout=15):
+        elif  d.find('menu_hot_highlight_nofocus.png', timeout=30):
             d.press('enter')
         else:
             assert False, 'launch video failed'  
-        d.expect('video_preview_sub_shoucang.png', timeout=20)
+        d.expect('video_preview_sub_shoucang.png', timeout=30)
         d.sleep(2)
         d.press('enter')
-        assert not d.find('video_preview_sub_shoucang.png', timeout=20), 'video not start!'
+        assert d(resourceId='com.duokan.duokantv:id/main_frame').wait.exists(timeout=30000), 'video not start!'
+        #assert not d.find('video_preview_sub_shoucang.png', timeout=30), 'video not start!'
         d.sleep(60)
         d.press('back')
-        d.expect('video_preview_sub_shoucang.png', timeout=20)
+        d.expect('video_preview_sub_shoucang.png', timeout=30)
         d.press('back')
 
 
