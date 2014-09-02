@@ -1,0 +1,16 @@
+[tests]
+#common define
+script.testcases.tests.Cases.testLaunchAndExitAppStore = 5
+script.testcases.tests.Cases.testLaunchAndExitCloudGallery = 5
+script.testcases.tests.Cases.testLaunchAndExitGameCenter = 5
+script.testcases.tests.Cases.testLaunchAndExitFM = 5
+script.testcases.tests.Cases.testLaunchAndExitSetting = 5
+script.testcases.tests.Cases.testLaunchAndExitVideo = 5
+#script.testcases.tests.Cases.testLaunchAndExitMiracast = 1
+script.testcases.tests.Cases.testLaunchAndExitMediaExplorer = 5
+script.testcases.fm.FMTest.testSwitchSong = 10
+script.testcases.gamecenter.GameCenterTest.testInstallAndUninstallGame = 1
+script.testcases.tests.Cases.testPlayVideoOnline = 10
+script.testcases.tests.Cases.testPlayVideoBetweenApp_short = 1
+#script.testcases.tests.Cases.testWifiOpenAndClose = 1
+
