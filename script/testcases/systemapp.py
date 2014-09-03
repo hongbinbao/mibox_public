@@ -29,7 +29,8 @@ class SystemAppTest(unittest.TestCase):
        """
         assert d(text="应用商店").exists, 'App Store icon not found!'
         d(text="应用商店").sibling(className='android.view.View').click.wait()
-        assert d(resourceId='com.xiaomi.mitv.appstore:id/title_chinese_textview', text='应用商店').wait.exists(timeout=10000), 'launch App Store failed!'
+        #assert d(resourceId='com.xiaomi.mitv.appstore:id/title_chinese_textview', text='应用商店').wait.exists(timeout=10000), 'launch App Store failed!'
+        assert d(resourceId='com.xiaomi.mitv.appstore:id/tv_tab_recommend', text='推荐').wait.exists(timeout=10000), 'launch App Store failed!'       
         d.press('back')
         assert d(text="应用商店").wait.exists(timeout=10000), 'exit from App Store failed!'
         #d(resourceId="com.xiaomi.mitv.appstore:id/title_chinese_textview",text='应 用商店').wait.exists()
@@ -80,7 +81,8 @@ class SystemAppTest(unittest.TestCase):
        """
         assert d(text="游戏中心").exists, 'Game Center icon not found!'
         d(text="游戏中心").sibling(className='android.view.View').click.wait() 
-        assert d(className='android.widget.FrameLayout').child(text="热门精选").wait.exists(timeout=20000), 'Launch Game Center failed!'
+        #assert d(className='android.widget.FrameLayout').child(text="热门精选").wait.exists(timeout=20000), 'Launch Game Center failed!'
+        assert d(resourceId='android:id/content').child(text="推荐").wait.exists(timeout=20000), 'Launch Game Center failed!'
         d.press('home') 
         assert d(text="游戏中心").wait.exists(timeout=10000), 'exit from Game Center failed!'
 
@@ -111,8 +113,10 @@ class SystemAppTest(unittest.TestCase):
             d.press('right')
         assert d(text="高清播放器").exists, 'Media Explorer icon not found!'
         d(text="高清播放器").click.wait()
-        assert d(resourceId='com.xiaomi.mitv.mediaexplorer:id/entry_name', text='设备').wait.exists(timeout=5000), 'launch Media Explorer failed!'
-        assert d(resourceId='com.xiaomi.mitv.mediaexplorer:id/entry_name', text="视频").wait.exists(timeout=5000), 'launch Media Explorer failed!'
+        #assert d(resourceId='com.xiaomi.mitv.mediaexplorer:id/entry_name', text='设备').wait.exists(timeout=5000), 'launch Media Explorer failed!'
+        #assert d(resourceId='com.xiaomi.mitv.mediaexplorer:id/entry_name', text="视频").wait.exists(timeout=5000), 'launch Media Explorer failed!'
+        assert d(resourceId='com.xiaomi.mitv.mediaexplorer:id/dev', text='设备').wait.exists(timeout=5000), 'launch Media Explorer failed!'
+        assert d(resourceId='com.xiaomi.mitv.mediaexplorer:id/video', text="视频").wait.exists(timeout=5000), 'launch Media Explorer failed!'       
         d.press('back')
         assert d(text="高清播放器").wait.exists(timeout=10000), 'exit from Media Explorer failed!'
 

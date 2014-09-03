@@ -32,7 +32,7 @@ class FMTest(unittest.TestCase):
             d.press('right')
         assert d(text="网络电台").exists, 'FM app icon not found!'
         d(text="网络电台").click.wait()
-        assert d(resourceId='com.xiaomi.mimusic:id/play_btn').wait.exists(timeout=10000), 'Open FM failed!'
+        assert d(resourceId='com.xiaomi.mimusic:id/play_btn').wait.exists(timeout=20000), 'Open FM failed!'
         d.sleep(10)
         assert d(resourceId='com.xiaomi.mimusic:id/title').child(className="android.widget.TextView").exists, 'song play screen not found!'
         first_song_name = d(resourceId='com.xiaomi.mimusic:id/title').child(className="android.widget.TextView").info['text']

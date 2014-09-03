@@ -59,7 +59,7 @@ class OnlineVideoTest(unittest.TestCase):
             d.press('enter')
         else:
             assert False, 'launch video failed'
-        d.expect('video_preview_sub_shoucang.png', threshold=0.05 ,timeout=30)
+        d.expect('video_preview_sub_shoucang2.png', threshold=0.05 ,timeout=30)
         d.sleep(2)
         d.press('enter')
         assert d(resourceId='com.duokan.duokantv:id/main_frame').wait.exists(timeout=30000), 'video not start!'
@@ -67,7 +67,7 @@ class OnlineVideoTest(unittest.TestCase):
         d.sleep(180)
         assert not d(textContains='播放失败').exists or not d(textContains='无法获取视频地址').exists or not d(textContains="正在读取视频信息").exists, 'Video start failed!'
         d.press('back')
-        d.expect('video_preview_sub_shoucang.png', threshold=0.05 , timeout=30)
+        d.expect('video_preview_sub_shoucang2.png', threshold=0.05 , timeout=30)
         d.press('back')
 
     def testPlayOnlineVideoLong(self):
@@ -99,7 +99,7 @@ class OnlineVideoTest(unittest.TestCase):
             d.press('enter')
         else:
             assert False, 'launch video failed' 
-        d.expect('video_preview_sub_shoucang.png', threshold=0.05 ,timeout=30)
+        d.expect('video_preview_sub_shoucang2.png', threshold=0.05 ,timeout=30)
         d.sleep(2)
         d.press('enter')
         assert d(resourceId='com.duokan.duokantv:id/main_frame').wait.exists(timeout=30000), 'video not start!'
@@ -107,7 +107,7 @@ class OnlineVideoTest(unittest.TestCase):
         d.sleep(1200)
         assert not d(textContains='播放失败').exists or not d(textContains='无法获取视频地址').exists or not d(textContains="正在读取视频信息").exists, 'Video start failed!'
         d.press('back')
-        d.expect('video_preview_sub_shoucang.png', threshold=0.05 , timeout=30)
+        d.expect('video_preview_sub_shoucang2.png', threshold=0.05 , timeout=30)
         d.press('back')
 
     def testPlayOnlineVideoBack(self):
